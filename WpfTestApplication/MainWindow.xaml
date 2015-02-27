@@ -1,0 +1,43 @@
+﻿<Window x:Class="WpfTestApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wpfControls="clr-namespace:Splinter.WpfControls;assembly=Splinter"
+        xmlns:easingFunctionOptions="clr-namespace:Splinter.WpfControls.Helpers.EasingFunctionOptions;assembly=Splinter"
+        xmlns:wpfTestApplication="clr-namespace:WpfTestApplication"
+        DataContext="{DynamicResource MainViewModel}"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <wpfTestApplication:MainViewModel x:Key="MainViewModel"/>
+        <wpfTestApplication:SwitchViewCommand x:Key="SwitchViewCommand"/>
+    </Window.Resources>
+    <Grid >
+        <StackPanel Margin="20">
+            <TextBox Margin="2" Text="{Binding Number1}"/>
+            <TextBox Margin="2" Text="{Binding Number2}"/>
+            <TextBox Margin="2" Text="{Binding Number3}"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="{Binding Number1}"/>
+                <TextBlock Text="{Binding Number2}"/>
+                <TextBlock Text="{Binding Number3}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <wpfControls:AnimatedContentControl Grid.Row="1" Content="{Binding CurrentViewModel}" MovementDirection="Left" EasingFunctionType="BounceEase" EasingMode="EaseInOut" AnimationSeconds="0.5">
+            <wpfControls:AnimatedContentControl.EasingFunctionOptions>
+                <easingFunctionOptions:BounceEaseOptions Bounces="3" Bounciness="10"/>
+            </wpfControls:AnimatedContentControl.EasingFunctionOptions>
+        </wpfControls:AnimatedContentControl>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock Text="Click to change View." Margin="5" />
+            <Button Content="Click Me" Command="{StaticResource SwitchViewCommand}"/>
+
+        </StackPanel>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+    </Grid>
+</Window>
